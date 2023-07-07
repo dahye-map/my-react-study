@@ -1,16 +1,14 @@
-const DiaryItem = ({ ...it }) => {
+const DiaryItem = ({ author, content, emotion, created_date }) => {
   return (
     <div className="DiaryItem">
       <div className="info">
         <span>
-          작성자 : {it.author} | 감정점수 : {it.emotion}
+          작성자 : {author} | 감정점수 : {emotion}
         </span>
         <br />
-        <span className="date">
-          {new Date(it.created_date).toLocaleString()}
-        </span>
+        <span className="date">{new Date(created_date).toLocaleString()}</span>
       </div>
-      <div className="content">{it.content}</div>
+      <div className="content">{content}</div>
     </div>
   );
 };
