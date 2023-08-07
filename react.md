@@ -28,3 +28,14 @@ ex) 초기화 작업 -> 예외 처리 작업 -> 메모리 정리 작업
 
 Client Side Rendering (CSR)
 하나의 페이지로 여러 요청을 받음
+
+### React Router v6
+
+React에서 CSR기반의 페이지 라우팅을 할 수 있게 해주는 라이브러리
+
+1. Path Variable
+   useParams
+2. Query String
+   useSearchParams
+3. Page Moving
+   useNavigate
