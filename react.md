@@ -18,3 +18,13 @@ ex) 초기화 작업 -> 예외 처리 작업 -> 메모리 정리 작업
 
 이미 계산 해 본 연산 결과를 기억해두었다가
 동일한 계산을 시키면 다시 연산하지 않고 기억해두었던 데이터를 반환 시키게 하는 방법
+
+### Multipage Application (MPA)
+
+페이지가 이동할 때마다 새로고침
+대체의 홈페이지들의 방식
+
+### Single Page Application (SPA)
+
+Client Side Rendering (CSR)
+하나의 페이지로 여러 요청을 받음
