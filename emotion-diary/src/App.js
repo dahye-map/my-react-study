@@ -1,3 +1,5 @@
+import { useReducer, useRef } from "react";
+
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
@@ -6,39 +8,53 @@ import New from "./pages/New";
 import Edit from "./pages/Edit";
 import Diary from "./pages/Diary";
 
-//components
-import MyButton from "./components/MyButton";
+const reducer = (state, action) => {
+  let newState = [];
+  switch (action.type) {
+    case "INIT": {
+      return action.data;
+    }
+    case "CREATE": {
+      const newItem = {
+        ...action.data,
+      };
+      newState = [newItem, ...state];
+      break;
+    }
+    case "REMOVE": {
+      newState = state.filter((it) => it.id !== action.targetId);
+      break;
+    }
+    case "EDIT": {
+      newState = state.map((it) =>
+        it.id === action.data.id ? { ...action.data } : it
+      );
+      break;
+    }
+    default:
+      return state;
+  }
+  return newState;
+};
 
 function App() {
+  const [data, dispatch] = useReducer(reducer, []);
+  const dataId = useRef(0);
+
+  //CREATE
+  const onCreate = (date, content, emotion) => {
+    dispatch({
+      type: "CREATE",
+      data: {
+        id: dataId.current,
+        date: new Date(),
+      },
+    });
+  };
+
   return (
     <BrowserRouter>
       <div className="App">
-        <h2>App.js</h2>
-
-        <MyButton
-          text={"버튼"}
-          onClick={() => alert("버튼 클릭")}
-          type={"positive"}
-        />
-
-        <MyButton
-          text={"버튼"}
-          onClick={() => alert("버튼 클릭")}
-          type={"negative"}
-        />
-
-        <MyButton
-          text={"버튼"}
-          onClick={() => alert("버튼 클릭")}
-          type={"default"}
-        />
-
-        {/* <img src={process.env.PUBLIC_URL + `/assets/emotion1.png`} alt="" />
-        <img src={process.env.PUBLIC_URL + `/assets/emotion2.png`} alt="" />
-        <img src={process.env.PUBLIC_URL + `/assets/emotion3.png`} alt="" />
-        <img src={process.env.PUBLIC_URL + `/assets/emotion4.png`} alt="" />
-        <img src={process.env.PUBLIC_URL + `/assets/emotion5.png`} alt="" /> */}
-
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/new" element={<New />} />
