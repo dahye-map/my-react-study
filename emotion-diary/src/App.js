@@ -47,7 +47,26 @@ function App() {
       type: "CREATE",
       data: {
         id: dataId.current,
-        date: new Date(),
+        date: new Date(date).getTime(),
+        content,
+        emotion,
+      },
+    });
+    dataId.current += 1;
+  };
+
+  const onRemove = (targetId) => {
+    dispatch({ type: "REMOVE", targetId });
+  };
+
+  const onEdit = (targetId, date, content, emotion) => {
+    dispatch({
+      type: "EDIT",
+      data: {
+        id: targetId,
+        date: new Date(date).getTime(),
+        content,
+        emotion,
       },
     });
   };
